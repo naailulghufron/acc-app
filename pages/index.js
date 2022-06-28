@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Layout from '../Components/Layouts'
 import data from '../utils/data'
+import controller from '../utils/dataAxios'
 
 export default function Home() {
   const data_filter = data.items.filter((item) => item.qty >= 30)
