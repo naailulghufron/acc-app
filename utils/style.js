@@ -20,7 +20,14 @@ const useStyles = makeStyles({
   },
   footer: {
     textAlign: 'center',
-  }
+  },
+  brand: {
+    fontWeight: 'bold',
+    fontsize: '1.5rem',
+  },
+  grow: {
+    flexGrow:1,
+  },
 });
 
 export default useStyles
