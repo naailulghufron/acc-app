@@ -1,4 +1,4 @@
-import Layout from "../components/Layouts";
+import Layout from "../../components/Layouts"
 import { 
   TableContainer,
   Table,
@@ -6,37 +6,31 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Paper
+  Paper,
+  Typography,
+  Button,
+  Stack,
+  Link
 
 } from '@mui/material';
+import NextLink from 'next/link';
 
 export const getStaticProps = async () => {
   const res = await fetch('https://jsonplaceholder.typicode.com/users');
-  // const res = await fetch('https://covid19.mathdro.id/api/confirmed')
   const data = await res.json();
 
-// console.log(data)
   return {
-    props: {dt : data}
+    props: {users : data}
   }
 }
 
-const show = ({dt}) => {
-  // console.log(dt)
+// const users = users
+
+const userList = ({users}) => {
   return (
     <Layout>
     <div>
-
-          {/* <ul> */}
-            {/* <li>
-              Province State : {s.provinceState}
-            </li>
-            <li>country region :{s.countryRegion}</li>
-            <li> */}
-              {/* Address : {s.address.street}{s.address.suite}{s.address.city}{s.address.geo.lat}{s.address.geo.lng} */}
-            {/* </li>
-          </ul> */}
-          
+      <Typography>Users List</Typography>
           <TableContainer component={Paper}>
             <Table>
               <TableHead>
@@ -47,10 +41,11 @@ const show = ({dt}) => {
                     <TableCell>Address</TableCell>
                     <TableCell>Phone</TableCell>
                     <TableCell>Website</TableCell>
+                    <TableCell>Action</TableCell>
                   </TableRow>
               </TableHead>
               <TableBody>
-                {dt.map((s) => (
+                {users.map((s) => (
                   <TableRow key={s.id}>
                     <TableCell>{s.name}</TableCell>
                     <TableCell>{s.username}</TableCell>
@@ -62,32 +57,24 @@ const show = ({dt}) => {
                     </TableCell>
                     <TableCell>{s.phone}</TableCell>
                     <TableCell>{s.website}</TableCell>
+                    <TableCell>
+                      <Stack direction="row" spacing={2}>
+                        <NextLink href={`/users/${s.id}`}>
+                          {/* <Link> */}
+                            <Button variant="outlined" size="small" color="success">Show</Button>
+                          {/* </Link> */}
+                        </NextLink>
+                        <Button variant="outlined" size="small" color="secondary">Edit</Button>
+                        <Button variant="outlined" size="small" color="error">Delete</Button>
+                      </Stack>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </TableContainer>
-
-          {/* <table>
-            <thead>
-              <tr>
-                <td>Province State</td>
-                <td>Country Region</td>
-                <td>Las update</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{s.provinceState}</td>
-                <td>{s.lastUpdate}</td>
-              </tr>
-            </tbody>
-          </table> */}
-
     </div>
     </Layout>
   )
 }
-
-export default show;
-
+export default userList

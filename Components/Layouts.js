@@ -4,19 +4,31 @@ import { AppBar, Toolbar, Typography, Link } from "@mui/material";
 import { Container } from "@mui/system";
 import useStyles from '../utils/style';
 import NextLink from 'next/link';
+import ButtonAppBar from "./MenuAppBar";
 
 export default function Layout({ children }) {
   const classes = useStyles()
   return (
     <div>
       <Head>
-        <title>Acc App</title>
+        {/* <title>Acc App</title> */}
+        {/* <ButtonAppBar></ButtonAppBar> */}
       </Head>
       <AppBar position="static" className={classes.navbar}>
         <Toolbar>
           <NextLink href="/" passHref>
             <Link>
               <Typography className={classes.brand}>ACC App</Typography>
+            </Link>
+          </NextLink>
+          <NextLink href="/fetch_api" passHref>
+            <Link>
+              <Typography className={classes.brand}>API</Typography>
+            </Link>
+          </NextLink>
+          <NextLink href="/users" passHref>
+            <Link>
+              <Typography className={classes.brand}>Users</Typography>
             </Link>
           </NextLink>
         </Toolbar>
